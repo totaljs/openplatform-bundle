@@ -1,0 +1,11 @@
+name                            : OpenPlatform v3
+author                          : Peter Širka
+version                         : 3.0.0
+
+allow-custom-titles             : true
+
+languages       (Array)         : ['en']
+cookie                          : __opu
+cookie-expiration               : 1 month
+
+cdn                             : //cdn.componentator.com
