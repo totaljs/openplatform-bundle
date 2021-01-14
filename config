@@ -1,11 +1,13 @@
-name                            : OpenPlatform v3
-author                          : Peter Širka
-version                         : 3.0.0
+name                        : OpenPlatform v4
+author                      : Peter Širka
+version                     : 4.0.0
 
-allow-custom-titles             : true
+allow_custom_titles         : true
+cookie          (genearte)  : 10
+cookie_expiration           : 1 week
+secretpassword  (generate)  : 10
+// hashmode                 : sha256
+// hashsalt                 : SALT_FOR_PASSWORDS
 
-languages       (Array)         : ['en']
-cookie                          : __opu
-cookie-expiration               : 1 month
-
-cdn                             : //cdn.componentator.com
+cdn                         : //cdn.componentator.com
+database                    : postgresql://user:pass@localhost:5432/openplatform
