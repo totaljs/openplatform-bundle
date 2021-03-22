@@ -543,7 +543,7 @@ INSERT INTO "public"."cl_config" ("id", "type", "value", "name", "dtcreated") VA
 ('defaultappid', 'string', '', 'defaultappid', NOW()),
 ('email', 'string', 'info@totaljs.com', 'email', NOW()),
 ('guest', 'boolean', 'true', 'guest', NOW()),
-('marketplace', 'string', 'https://marketplace.totaljs.com/openplatform/', 'marketplace', NOW()),
+('marketplace', 'string', 'https://marketplace.openplatform.cloud', 'marketplace', NOW()),
 ('maxmembers', 'number', '10', 'maxmembers', NOW()),
 ('name', 'string', 'OpenPlatform', 'name', NOW()),
 ('sender', 'string', 'info@totaljs.com', 'sender', NOW()),
