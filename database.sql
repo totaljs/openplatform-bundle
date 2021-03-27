@@ -61,6 +61,7 @@ CREATE TABLE "public"."tbl_user" (
 	"checksum" varchar(30),
 	"note" varchar(80),
 	"repo" jsonb,
+	"dn" varchar(500),
 	"ou" _varchar,
 	"roles" _varchar,
 	"groups" _varchar,
@@ -197,16 +198,6 @@ CREATE TABLE "public"."tbl_user_config" (
 	CONSTRAINT "tbl_user_config_appid_fkey" FOREIGN KEY ("appid") REFERENCES "public"."tbl_app"("id") ON DELETE CASCADE
 );
 
-CREATE TABLE "public"."tbl_user_log" (
-	"userid" varchar(25),
-	"appid" varchar(25),
-	"type" varchar(10),
-	"body" varchar(500),
-	"dtcreated" timestamp DEFAULT now(),
-	CONSTRAINT "tbl_user_log_appid_fkey" FOREIGN KEY ("appid") REFERENCES "public"."tbl_app"("id") ON DELETE CASCADE,
-	CONSTRAINT "tbl_user_log_userid_fkey" FOREIGN KEY ("userid") REFERENCES "public"."tbl_user"("id") ON DELETE CASCADE
-);
-
 CREATE TABLE "public"."tbl_user_session" (
 	"id" varchar(25) NOT NULL,
 	"userid" varchar(25),
@@ -228,8 +219,8 @@ CREATE TABLE "public"."tbl_log" (
 	"id" serial,
 	"userid" varchar(25),
 	"rowid" varchar(50),
-	"type" varchar(25),
-	"message" varchar(200),
+	"type" varchar(80),
+	"message" varchar(500),
 	"username" varchar(60),
 	"ua" varchar(30),
 	"data" text,
@@ -457,6 +448,7 @@ CREATE VIEW view_user AS
 		a.dtlogged,
 		a.dtmodified,
 		a.oauth2,
+		a.dn,
 		CASE WHEN (length(a.deputyid) > 0) THEN (SELECT b.name FROM tbl_user b WHERE b.id = a.deputyid LIMIT 1) ELSE ''::text END AS deputy,
 		CASE WHEN (length(a.supervisorid) > 0) THEN (SELECT c.name FROM tbl_user c WHERE c.id=a.supervisorid LIMIT 1) ELSE ''::text END AS supervisor
 	FROM tbl_user a;
@@ -494,6 +486,7 @@ CREATE INDEX tbl_user_member_idx_user ON tbl_user_member(userid text_ops);
 CREATE INDEX tbl_user_idx_group ON tbl_user(groupshash text_ops);
 CREATE INDEX tbl_user_notification_idx_query ON tbl_user_notification(userappid text_ops);
 CREATE INDEX tbl_user_idx_reference ON tbl_user(reference text_ops);
+CREATE INDEX tbl_user_inx_dn ON tbl_user(dn text_ops);
 
 -- ==============================
 -- COMMENTS
@@ -525,6 +518,7 @@ INSERT INTO "public"."cl_config" ("id", "type", "value", "name", "dtcreated") VA
 ('allow_custom_titles', 'boolean', 'true', 'allow_custom_titles', NOW()),
 ('allowappearance', 'boolean', 'true', 'allowappearance', NOW()),
 ('allowbackground', 'boolean', 'true', 'allowbackground', NOW()),
+('allowpassword', 'boolean', 'true', 'allowpassword', NOW()),
 ('allowclock', 'boolean', 'true', 'allowclock', NOW()),
 ('allowcreate', 'string', '', 'allowcreate', NOW()),
 ('allowdesktop', 'boolean', 'true', 'allowdesktop', NOW()),
