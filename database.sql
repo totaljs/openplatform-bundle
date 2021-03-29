@@ -16,6 +16,7 @@ CREATE TABLE "public"."cl_language" (
 	"id" varchar(2) NOT NULL,
 	"name" varchar(50),
 	"spoken" varchar(40),
+	"active" boolean DEFAULT true,
 	PRIMARY KEY ("id")
 );
 
@@ -546,7 +547,7 @@ INSERT INTO "public"."cl_config" ("id", "type", "value", "name", "dtcreated") VA
 ('smtpsettings', 'json', '{"user":"","password":"","timeout":2000}', 'smtpsettings', NOW()),
 ('test', 'boolean', 'true', 'test', NOW()),
 ('url', 'string', 'https://YOURDOMAIN.com', 'url', NOW()),
-('verifytoken', 'string', SUBSTRING((SELECT md5(random()::text)), 0, 10), 'verifytoken', NOW()),
+('verifytoken', 'string', SUBSTRING((SELECT md5(random()::text)), 0, 25), 'verifytoken', NOW()),
 ('welcome', 'string', '', 'welcome', NOW());
 
 -- INSERT LANGUAGES
